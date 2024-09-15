@@ -38,3 +38,49 @@ Scenario: Create a Product
     And I should see "True" in the "Available" dropdown
     And I should see "Tools" in the "Category" dropdown
     And I should see "34.95" in the "Price" field
+Scenario: Read a Product
+    When I visit the "Home Page"
+    And I set the "Name" to "Hat"
+    And I press the "Search" button
+    Then I should see the message "Success"
+    When I copy the "Id" field
+    And I press the "Clear" button
+    And I paste the "Id" field
+    And I press the "Retrieve" button
+    Then I should see the message "Success"
+    And I should see "Hat" in the "Name" field
+    And I should see "A red fedora" in the "Description" field
+    And I should see "True" in the "Available" dropdown
+    And I should see "Cloths" in the "Category" dropdown
+    And I should see "59.95" in the "Price" field
+Scenario: Update a Product
+    When I visit the "Home Page"
+    And I create a product with name "Shoes" and description "Running shoes"
+    And I press the "Update" button
+    Then I should see the message "Product updated successfully"
+    And I should see "Shoes" in the "Name" field
+    And I should see "Running shoes" in the "Description" field
+Scenario: Delete a Product
+    When I visit the "Home Page"
+    And I create a product with name "Jacket"
+    And I press the "Delete" button
+    Then I should see the message "Product deleted successfully"
+Scenario: List all Products
+    When I visit the "Home Page"
+    And I press the "List All" button
+    Then I should see all the products in the product list
+Scenario: Search Products by Category
+    When I visit the "Home Page"
+    And I select "Cloths" from the "Category" dropdown
+    And I press the "Search" button
+    Then I should see all products from the "Cloths" category
+Scenario: Search Products by Availability
+    When I visit the "Home Page"
+    And I select "True" from the "Available" dropdown
+    And I press the "Search" button
+    Then I should see all available products
+Scenario: Search Products by Name
+    When I visit the "Home Page"
+    And I set the "Name" to "Shoes"
+    And I press the "Search" button
+    Then I should see all products with the name "Shoes"
